@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Server {
 
     public void run() throws Exception{
-        int port = 8010;
+        int port = 8081;
         ServerSocket socket = new ServerSocket(port);
         socket.setSoTimeout(10000);
 
@@ -17,8 +17,10 @@ public class Server {
             System.out.println("Connection accepted from client "+acceptedConnection.getRemoteSocketAddress()) ;
             PrintWriter toClient = new PrintWriter(acceptedConnection.getOutputStream());
             BufferedReader fromClient = new BufferedReader(new InputStreamReader(acceptedConnection.getInputStream()));
-            toClient.println("Helllo from the server");
-
+            toClient.println("Hello from the server");
+            toClient.close();
+            fromClient.close();
+            acceptedConnection.close();
         }
     }
 
